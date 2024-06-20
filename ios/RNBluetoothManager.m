@@ -177,6 +177,65 @@ RCT_EXPORT_METHOD(stopScan:(RCTPromiseResolveBlock)resolve
     resolve(nil);
 }
 
+
+RCT_EXPORT_METHOD(checkState:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+{
+    if (self.centralManager != nil){
+        NSString *stateName = [self centralManagerStateToString:self.centralManager.state];
+        resolve(@[stateName]);
+    }
+}
+
+- (NSString *) centralManagerStateToString: (int)state
+{
+    switch (state) {
+        case CBManagerStateUnknown:
+            return @"unknown";
+        case CBManagerStateResetting:
+            return @"resetting";
+        case CBManagerStateUnsupported:
+            return @"unsupported";
+        case CBManagerStateUnauthorized:
+            return @"unauthorized";
+        case CBManagerStatePoweredOff:
+            return @"off";
+        case CBManagerStatePoweredOn:
+            return @"on";
+        default:
+            return @"unknown";
+    }
+    
+    return @"unknown";
+}
+
+
+RCT_EXPORT_METHOD(checkAuthorizationState:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+{
+    if (self.centralManager != nil){
+        CBManagerAuthorization authorizationStatus = [self.centralManager authorization];
+        NSString *stateName = [self centralManagerAuthorizationStateToString:authorizationStatus];
+        resolve(@[stateName]);
+    }
+}
+
+- (NSString *) centralManagerAuthorizationStateToString: (int)authorizationStatus
+{
+    switch (authorizationStatus) {
+        case CBManagerAuthorizationNotDetermined:
+            return @"not determined";
+        case CBManagerAuthorizationRestricted:
+            return @"restricted";
+        case CBManagerAuthorizationDenied:
+            return @"denied";
+        case CBManagerAuthorizationAllowedAlways:
+            return @"granted";
+        default:
+            return @"unknown";
+    }
+}
+
 //connect(address)
 RCT_EXPORT_METHOD(connect:(NSString *)address
                   findEventsWithResolver:(RCTPromiseResolveBlock)resolve
