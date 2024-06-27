@@ -46,8 +46,8 @@ public class RNBluetoothManagerModule extends ReactContextBaseJavaModule
 
 
     // Intent request codes
-    private static final int REQUEST_CONNECT_DEVICE = 1;
-    private static final int REQUEST_ENABLE_BT = 2;
+    private static final int REQUEST_CONNECT_DEVICE = 1835;
+    private static final int REQUEST_ENABLE_BT = 2835;
 
     public static final int MESSAGE_STATE_CHANGE = BluetoothService.MESSAGE_STATE_CHANGE;
     public static final int MESSAGE_READ = BluetoothService.MESSAGE_READ;
