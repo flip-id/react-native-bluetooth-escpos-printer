@@ -90,7 +90,7 @@ public class RNBluetoothManagerModule extends ReactContextBaseJavaModule
             this.reactContext.registerReceiver(
                 discoverReceiver, filter, Context.RECEIVER_EXPORTED);
         } else {
-            this.reactContextcontext.registerReceiver(discoverReceiver, filter);
+            this.reactContext.registerReceiver(discoverReceiver, filter);
         }
     }
 
